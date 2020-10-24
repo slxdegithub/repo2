@@ -1,0 +1,62 @@
+
+server:
+  port: 80
+#
+#
+#system-params:
+#  url: http://47.96.154.180:8030
+#  file_path: /home/uftp/upload
+#  ftp_server: 47.96.154.180
+#  ftp_port: 21
+#  ftp_user: test
+#  ftp_password: 123456
+
+spring:
+  session:
+    store-type: redis
+  datasource:
+    url: jdbc:mysql://localhost:3306/boot?allowMultiQueries=true&serverTimezone=UTC
+    password: root
+    hikari.idle-timeout: 60000
+    hikari.maximum-pool-size: 30
+    hikari.minimum-idle: 10
+    username: root
+  servlet:
+    multipart:
+      #\u6700\u5927\u6587\u4EF6\u5927\u5C0F\u3002\u503C\u53EF\u4EE5\u4F7F\u7528\u540E\u7F00\u201CMB\u201D\u6216\u201CKB\u201D\u3002\u6307\u793A\u5146\u5B57\u8282\u6216\u5343\u5B57\u8282\u5927\u5C0F\u3002
+      enabled: true
+      max-file-size: 50MB
+      # \u6700\u5927\u8BF7\u6C42\u5927\u5C0F\u53EF\u4EE5\u662Fmb\u4E5F\u53EF\u4EE5\u662Fkb
+      max-request-size: 200MB
+  mvc:
+    view:
+      prefix: /WEB-INF/
+      suffix: .jsp
+  redis:
+    host: 47.96.154.180
+    port: 6379
+    database: 10
+
+#   thymeleaf:
+#     prefix: /templates   # \u8BBF\u95EEtemplate\u4E0B\u7684html\u6587\u4EF6\u9700\u8981\u914D\u7F6E\u6A21\u677F\uFF0C\u6620\u5C04
+#     cache: false # \u5F00\u53D1\u65F6\u5173\u95ED\u7F13\u5B58,\u4E0D\u7136\u6CA1\u6CD5\u770B\u5230\u5B9E\u65F6\u9875\u9762
+
+#\u5F00\u542F\u9A7C\u5CF0\u547D\u540D
+mybatis:
+  #config-location: classpath:mapper/*.xml
+  type-aliases-package: com.xyxy.boot.model
+  configuration:
+    map-underscore-to-camel-case: true
+  mapper-locations: classpath:mapper/*.xml
+devtools:
+  restart:
+    enabled: true  #\u8BBE\u7F6E\u5F00\u542F\u70ED\u90E8\u7F72
+    additional-paths: src/main/java #\u91CD\u542F\u76EE\u5F55
+    exclude: WEB-INF/**
+freemarker:
+  cache: false    #\u9875\u9762\u4E0D\u52A0\u8F7D\u7F13\u5B58\uFF0C\u4FEE\u6539\u5373\u65F6\u751F\u6548
+
+#\u914D\u7F6E\u5916\u90E8\u8BBF\u95EE\u6587\u4EF6
+cbs:
+  imagesPath:
+    file: /E:/FileUpload/
